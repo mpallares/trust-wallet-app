@@ -4,10 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import { initializeWalletCore, WalletCore } from '../lib/walletCore';
-const { createSecureWallet, saveWallet } = await import('../lib/secureWallet');
+import { createSecureWallet } from '../lib/secureWallet';
+import { useWallets } from '../hooks/useWallets';
 
 const HomePage = () => {
   const router = useRouter();
+  const { addWallet, getWalletsCount } = useWallets();
+  
   const [walletCore, setWalletCore] = useState<WalletCore | null>(null);
   const [isInitializing, setIsInitializing] = useState(true);
   const [isCreating, setIsCreating] = useState(false);
@@ -21,9 +24,10 @@ const HomePage = () => {
       try {
         setIsInitializing(true);
         setError(null);
+        
         const core = await initializeWalletCore();
-
         setWalletCore(core);
+        
         setInitSuccess(true);
       } catch (err) {
         const errorMsg = `Failed to initialize Trust Wallet Core: ${err}`;
@@ -62,16 +66,14 @@ const HomePage = () => {
       // Create encrypted wallet using Trust Wallet Core's AES encryption
       const newWallet = await createSecureWallet(password, walletName);
 
-      // Save encrypted wallet to storage
-      saveWallet(newWallet);
-
-      console.log('🎉 New secure wallet created:', newWallet.id);
+      // Save encrypted wallet
+      addWallet(newWallet);
 
       // Show success popup
       setShowSuccessPopup(true);
     } catch (err) {
       setError(`Failed to create wallet: ${err}`);
-      console.error('❌ Wallet creation failed:', err);
+      console.error('Wallet creation failed:', err);
     } finally {
       setIsCreating(false);
     }
@@ -82,15 +84,6 @@ const HomePage = () => {
     router.push('/wallets');
   };
 
-  // Get existing wallets count
-  const getWalletsCount = () => {
-    try {
-      const wallets = JSON.parse(localStorage.getItem('trustWallets') || '[]');
-      return wallets.length;
-    } catch {
-      return 0;
-    }
-  };
 
   return (
     <div className={styles.container}>
