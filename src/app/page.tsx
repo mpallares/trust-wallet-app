@@ -6,6 +6,7 @@ import styles from './page.module.css';
 import { initializeWalletCore, WalletCore } from '../lib/walletCore';
 import { createSecureWallet } from '../lib/secureWallet';
 import { useWallets } from '../hooks/useWallets';
+import { Button } from '../components/Button';
 
 const HomePage = () => {
   const router = useRouter();
@@ -217,37 +218,33 @@ const HomePage = () => {
             </div>
 
             <div className={styles.actionButtons}>
-              <button
+              <Button
                 onClick={createWallet}
                 disabled={isCreating}
-                className={`${styles.primaryButton} ${
-                  isCreating ? styles.loading : ''
-                }`}
+                variant="primary"
+                loading={isCreating}
               >
                 {isCreating ? (
-                  <>
-                    <div className={styles.buttonSpinner}></div>
-                    Creating Wallet...
-                  </>
+                  'Creating Wallet...'
                 ) : (
                   <>
                     <span className={styles.buttonIcon}>🎲</span>
                     Create New Wallet
                   </>
                 )}
-              </button>
+              </Button>
 
               {getWalletsCount() > 0 && (
-                <button
+                <Button
                   disabled={
                     isCreating || isInitializing || getWalletsCount() === 0
                   }
                   onClick={viewWallets}
-                  className={styles.secondaryButton}
+                  variant="secondary"
                 >
                   <span className={styles.buttonIcon}>💼</span>
                   View Wallets ({getWalletsCount()})
-                </button>
+                </Button>
               )}
             </div>
           </div>
