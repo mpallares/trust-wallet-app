@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './Modal.module.css';
+import { Button } from './Button';
 
 export interface ModalProps {
   isOpen: boolean;
@@ -40,12 +41,12 @@ export const Modal = ({
         {title && (
           <div className={styles.modalHeader}>
             <h3 className={styles.modalTitle}>{title}</h3>
-            <button
+            <Button
               onClick={onClose}
-              className={styles.closeButton}
+              variant="icon"
             >
               ✕
-            </button>
+            </Button>
           </div>
         )}
         <div className={styles.modalContent}>

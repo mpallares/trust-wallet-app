@@ -10,6 +10,7 @@ import { useBalancePolling } from '../../hooks/useBalancePolling';
 import { getAllTestnetNetworks } from '../../config/networks';
 import { Modal } from '../../components/Modal';
 import { WalletCard } from '../../components/WalletCard';
+import { Button } from '../../components/Button';
 
 const WalletsPage = () => {
   const router = useRouter();
@@ -85,9 +86,9 @@ const WalletsPage = () => {
     <div className={styles.container}>
       {/* Header */}
       <header className={styles.header}>
-        <button onClick={() => router.push('/')} className={styles.backButton}>
+        <Button onClick={() => router.push('/')} variant="icon">
           ←
-        </button>
+        </Button>
         <h1 className={styles.title}>My Wallets</h1>
       </header>
 
@@ -153,19 +154,19 @@ const WalletsPage = () => {
         </div>
 
         <div className={styles.modalButtons}>
-          <button
+          <Button
             onClick={handlePasswordSubmit}
-            className={styles.submitButton}
+            variant="primary"
             disabled={!password}
           >
             View Private Key
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={closePrivateKeyModal}
-            className={styles.cancelButton}
+            variant="secondary"
           >
             Cancel
-          </button>
+          </Button>
         </div>
       </Modal>
     </div>

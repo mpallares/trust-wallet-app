@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './WalletCard.module.css';
 import { SecureWallet, WalletBalance, NetworkConfig } from '../types';
 import { ChainItem } from './ChainItem';
+import { Button } from './Button';
 
 export interface WalletCardProps {
   wallet: SecureWallet;
@@ -32,12 +33,12 @@ export const WalletCard = ({
             Created: {formatDate(wallet.createdAt)}
           </p>
         </div>
-        <button
+        <Button
           onClick={() => onViewPrivateKey(wallet.id)}
-          className={styles.viewKeyButton}
+          variant="secondary"
         >
           🔑 View Private Key
-        </button>
+        </Button>
       </div>
 
       <div className={styles.addressesList}>

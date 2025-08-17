@@ -8,6 +8,8 @@ import { createSecureWallet } from '../lib/secureWallet';
 import { useWallets } from '../hooks/useWallets';
 import { Button } from '../components/Button';
 import { ChainItem } from '../components/ChainItem';
+import { Modal } from '../components/Modal';
+import { WalletCreationForm } from '../components/WalletCreationForm';
 
 const HomePage = () => {
   const router = useRouter();
@@ -19,6 +21,7 @@ const HomePage = () => {
   const [error, setError] = useState<string | null>(null);
   const [initSuccess, setInitSuccess] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   // Initialize Trust Wallet Core
   useEffect(() => {
@@ -44,34 +47,24 @@ const HomePage = () => {
   }, []);
 
   // Create a new wallet with password protection
-  const createWallet = async () => {
+  const handleCreateWallet = async (formData: { walletName: string; password: string }) => {
     if (!walletCore) {
       setError('Wallet Core not initialized. Please refresh the page.');
       return;
     }
-
-    // Get password from user
-    const password = prompt(
-      'Enter a password to secure your wallet (min 8 characters):'
-    );
-    if (!password || password.length < 8) {
-      setError('Password must be at least 8 characters long');
-      return;
-    }
-
-    const walletName = prompt('Enter a name for your wallet:') || 'My Wallet';
 
     try {
       setIsCreating(true);
       setError(null);
 
       // Create encrypted wallet using Trust Wallet Core's AES encryption
-      const newWallet = await createSecureWallet(password, walletName);
+      const newWallet = await createSecureWallet(formData.password, formData.walletName);
 
       // Save encrypted wallet
       addWallet(newWallet);
 
-      // Show success popup
+      // Close modal and show success popup
+      setShowCreateModal(false);
       setShowSuccessPopup(true);
     } catch (err) {
       setError(`Failed to create wallet: ${err}`);
@@ -136,12 +129,12 @@ const HomePage = () => {
             <div className={styles.errorContent}>
               <h3 className={styles.errorTitle}>Initialization Error</h3>
               <p className={styles.errorDescription}>{error}</p>
-              <button
+              <Button
                 onClick={() => window.location.reload()}
-                className={styles.retryButton}
+                variant="primary"
               >
                 Retry
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -159,21 +152,21 @@ const HomePage = () => {
                 securely.
               </p>
               <div className={styles.popupButtons}>
-                <button
+                <Button
                   onClick={() => setShowSuccessPopup(false)}
-                  className={styles.popupButton}
+                  variant="secondary"
                 >
                   Continue
-                </button>
-                <button
+                </Button>
+                <Button
                   onClick={() => {
                     setShowSuccessPopup(false);
                     router.push('/wallets');
                   }}
-                  className={styles.popupButtonSecondary}
+                  variant="primary"
                 >
                   View All Wallets
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -192,19 +185,12 @@ const HomePage = () => {
 
             <div className={styles.actionButtons}>
               <Button
-                onClick={createWallet}
+                onClick={() => setShowCreateModal(true)}
                 disabled={isCreating}
                 variant="primary"
-                loading={isCreating}
               >
-                {isCreating ? (
-                  'Creating Wallet...'
-                ) : (
-                  <>
-                    <span className={styles.buttonIcon}>🎲</span>
-                    Create New Wallet
-                  </>
-                )}
+                <span className={styles.buttonIcon}>🎲</span>
+                Create New Wallet
               </Button>
 
               {getWalletsCount() > 0 && (
@@ -222,6 +208,19 @@ const HomePage = () => {
             </div>
           </div>
         )}
+
+        {/* Wallet Creation Modal */}
+        <Modal
+          isOpen={showCreateModal}
+          onClose={() => setShowCreateModal(false)}
+          title="Create New Wallet"
+        >
+          <WalletCreationForm
+            onSubmit={handleCreateWallet}
+            onCancel={() => setShowCreateModal(false)}
+            isCreating={isCreating}
+          />
+        </Modal>
       </main>
     </div>
   );
