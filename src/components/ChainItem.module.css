@@ -1,0 +1,82 @@
+
+.chainItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.chainIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.chainIcon:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Compact variant - for wallet card addresses */
+.chainIcon.compact {
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  backdrop-filter: none;
+  border: none;
+  transform: none;
+}
+
+.chainIcon.compact:hover {
+  transform: none;
+  background: inherit;
+}
+
+.chainName {
+  font-weight: 600;
+  color: #4b5563;
+  min-width: 100px;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ethereumIcon {
+  background: linear-gradient(135deg, #627eea, #4f46e5);
+}
+
+.bnbchainIcon {
+  background: linear-gradient(135deg, #f3ba2f, #fbbf24);
+  color: #1e1e1e;
+}
+
+.defaultIcon {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chainIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .chainName {
+    min-width: auto;
+  }
+}
