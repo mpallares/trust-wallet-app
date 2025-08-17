@@ -5,11 +5,16 @@ import { useRouter } from 'next/navigation';
 import styles from './wallets.module.css';
 import { exportMnemonic } from '../../lib/secureWallet';
 import { useWallets } from '../../hooks/useWallets';
+import { useAppSelector } from '../../store/hooks';
+import { useBalancePolling } from '../../hooks/useBalancePolling';
+import { getAllTestnetNetworks } from '../../config/networks';
 
 const WalletsPage = () => {
   const router = useRouter();
   const { wallets } = useWallets();
-  
+  const { wallets: balanceWallets } = useAppSelector((state) => state.balances);
+  useBalancePolling();
+
   const [selectedWallet, setSelectedWallet] = useState<string | null>(null);
   const [password, setPassword] = useState('');
   const [showPrivateKey, setShowPrivateKey] = useState(false);
@@ -17,7 +22,6 @@ const WalletsPage = () => {
   const [decryptedMnemonic, setDecryptedMnemonic] = useState<string | null>(
     null
   );
-
 
   // Handle viewing private key
   const handleViewPrivateKey = (walletId: string) => {
@@ -39,7 +43,6 @@ const WalletsPage = () => {
 
       // Update state to show the mnemonic
       setDecryptedMnemonic(mnemonic);
-
     } catch (err) {
       setError('Invalid password or failed to decrypt wallet');
       console.error('Decryption failed:', err);
@@ -64,6 +67,16 @@ const WalletsPage = () => {
       hour: '2-digit',
       minute: '2-digit',
     });
+  };
+
+  // Get wallet balances
+  const getWalletBalances = (walletId: string) => {
+    return balanceWallets[walletId]?.balances || [];
+  };
+
+  // Check if wallet balances are loading
+  const isWalletBalancesLoading = (walletId: string) => {
+    return balanceWallets[walletId]?.isLoading || false;
   };
 
   return (
@@ -136,6 +149,48 @@ const WalletsPage = () => {
                     </div>
                   );
                 })}
+              </div>
+
+              {/* Testnet Balances */}
+              <div className={styles.balancesSection}>
+                <h4 className={styles.balancesTitle}>
+                  Testnet Balances
+                  {isWalletBalancesLoading(wallet.id) && (
+                    <span className={styles.loadingSpinner}>🔄</span>
+                  )}
+                </h4>
+                {getWalletBalances(wallet.id).length > 0 ? (
+                  <div className={styles.balancesList}>
+                    {getWalletBalances(wallet.id).map((balance) => {
+                      const networks = getAllTestnetNetworks();
+                      const network = networks.find(
+                        (n) => n.id === balance.networkId
+                      );
+
+                      return (
+                        <div
+                          key={`${balance.address}-${balance.networkId}`}
+                          className={styles.balanceItem}
+                        >
+                          <span className={styles.balanceNetwork}>
+                            {network?.displayName || balance.networkId}:
+                          </span>
+                          <span
+                            className={`${styles.balanceAmount} ${
+                              balance.error ? styles.balanceError : ''
+                            }`}
+                          >
+                            {balance.error
+                              ? 'Error'
+                              : `${balance.formattedBalance} ${network?.nativeCurrency.symbol}`}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : !isWalletBalancesLoading(wallet.id) ? (
+                  <p className={styles.noBalances}>Loading balances...</p>
+                ) : null}
               </div>
             </div>
           ))}
