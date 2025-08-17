@@ -1,17 +1,8 @@
-import { NetworkConfig } from '../config/networks';
-
-export interface WalletBalance {
-  address: string;
-  networkId: string;
-  balance: string;
-  formattedBalance: string;
-  lastUpdated: number;
-  error?: string;
-}
+import type { NetworkConfig, WalletBalance } from '../types';
+import { TIMING, API_ROUTES, ADDRESS_TYPES } from '../constants';
 
 // cache
 const cache = new Map<string, { balance: string; timestamp: number }>();
-const CACHE_TTL = 30000; // 30 seconds
 
 // Convert Wei to readable format
 const formatBalance = (balance: string, decimals: number = 18): string => {
@@ -32,7 +23,7 @@ export const getBalance = async (address: string, network: NetworkConfig): Promi
   const now = Date.now();
 
   // Return cached if fresh
-  if (cached && (now - cached.timestamp) < CACHE_TTL) {
+  if (cached && (now - cached.timestamp) < TIMING.BALANCE_CACHE_TTL) {
     return {
       address,
       networkId: network.id,
@@ -44,7 +35,7 @@ export const getBalance = async (address: string, network: NetworkConfig): Promi
 
   // Fetch fresh balance
   try {
-    const response = await fetch('/api/balance', {
+    const response = await fetch(API_ROUTES.BALANCE, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ address, networkId: network.id }),
@@ -89,13 +80,13 @@ export const getBalancesForWallet = async (
 
   for (const network of networks) {
     // Map network to address type
-    const addressKey = network.id === 'sepolia' ? 'ethereum' : 'bnbchain';
+    const addressKey = network.id === 'sepolia' ? ADDRESS_TYPES.ETHEREUM : ADDRESS_TYPES.BNBCHAIN;
     const address = addresses[addressKey];
     
     if (address) {
       // Add delay to prevent rate limiting
       if (results.length > 0) {
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, TIMING.RATE_LIMIT_DELAY));
       }
       
       const balance = await getBalance(address, network);

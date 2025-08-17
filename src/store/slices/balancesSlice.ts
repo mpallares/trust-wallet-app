@@ -1,13 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { WalletBalance, getBalancesForWallet } from '../../services/balanceService';
+import type { WalletState, SecureWallet } from '../../types';
+import { getBalancesForWallet } from '../../services/balanceService';
 import { getAllTestnetNetworks } from '../../config/networks';
-import { SecureWallet } from '../../lib/secureWallet';
-
-interface WalletState {
-  balances: WalletBalance[];
-  isLoading: boolean;
-  error: string | null;
-}
 
 export const fetchWalletBalances = createAsyncThunk(
   'balances/fetch',

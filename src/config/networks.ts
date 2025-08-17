@@ -1,25 +1,13 @@
-export interface NetworkConfig {
-  id: string;
-  name: string;
-  displayName: string;
-  chainId: number;
-  rpcUrl: string;
-  explorerUrl: string;
-  nativeCurrency: {
-    name: string;
-    symbol: string;
-    decimals: number;
-  };
-  testnet: boolean;
-}
+import type { NetworkConfig } from '../types';
+import { NETWORK_IDS, CHAIN_IDS, RPC_URLS } from '../constants';
 
 export const TESTNET_NETWORKS: Record<string, NetworkConfig> = {
-  sepolia: {
-    id: 'sepolia',
+  [NETWORK_IDS.SEPOLIA]: {
+    id: NETWORK_IDS.SEPOLIA,
     name: 'ethereum-sepolia',
     displayName: 'Ethereum Sepolia',
-    chainId: 11155111,
-    rpcUrl: 'https://ethereum-sepolia-rpc.publicnode.com',
+    chainId: CHAIN_IDS.SEPOLIA,
+    rpcUrl: RPC_URLS[NETWORK_IDS.SEPOLIA],
     explorerUrl: 'https://sepolia.etherscan.io',
     nativeCurrency: {
       name: 'Sepolia Ether',
@@ -27,14 +15,13 @@ export const TESTNET_NETWORKS: Record<string, NetworkConfig> = {
       decimals: 18,
     },
     testnet: true,
-   
   },
-  'bsc-testnet': {
-    id: 'bsc-testnet',
+  [NETWORK_IDS.BSC_TESTNET]: {
+    id: NETWORK_IDS.BSC_TESTNET,
     name: 'bsc-testnet',
     displayName: 'BSC Testnet',
-    chainId: 97,
-    rpcUrl: 'https://bsc-testnet.publicnode.com',
+    chainId: CHAIN_IDS.BSC_TESTNET,
+    rpcUrl: RPC_URLS[NETWORK_IDS.BSC_TESTNET],
     explorerUrl: 'https://testnet.bscscan.com',
     nativeCurrency: {
       name: 'Test BNB',
