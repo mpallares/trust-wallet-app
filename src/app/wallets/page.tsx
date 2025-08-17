@@ -82,18 +82,18 @@ const WalletsPage = () => {
   return (
     <div className={styles.container}>
       {/* Header */}
-      <div className={styles.header}>
+      <header className={styles.header}>
         <button onClick={() => router.push('/')} className={styles.backButton}>
           ←
         </button>
         <h1 className={styles.title}>My Wallets</h1>
-      </div>
+      </header>
 
       {/* Main Content */}
       <main className={styles.main}>
         <div className={styles.walletsList}>
           {wallets.map((wallet) => (
-            <div key={wallet.id} className={styles.walletCard}>
+            <article key={wallet.id} className={styles.walletCard}>
               <div className={styles.walletHeader}>
                 <div className={styles.walletInfo}>
                   <h3 className={styles.walletTitle}>
@@ -192,7 +192,7 @@ const WalletsPage = () => {
                   <p className={styles.noBalances}>Loading balances...</p>
                 ) : null}
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </main>

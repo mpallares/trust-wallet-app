@@ -88,10 +88,10 @@ const HomePage = () => {
   return (
     <div className={styles.container}>
       {/* Header */}
-      <div className={styles.header}>
+      <header className={styles.header}>
         <h1 className={styles.brandName}>Trust Wallet</h1>
         <p className={styles.brandTagline}>Multi-Chain Wallet Manager</p>
-      </div>
+      </header>
 
       {/* Main Content */}
       <main className={styles.main}>
