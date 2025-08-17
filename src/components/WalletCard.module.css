@@ -74,36 +74,6 @@
   flex-wrap: wrap;
 }
 
-.chainName {
-  font-weight: 600;
-  color: #4b5563;
-  min-width: 100px;
-  text-transform: capitalize;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.chainIcon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-}
-
-.ethereumIcon {
-  background: linear-gradient(135deg, #627eea, #4b6bf5);
-}
-
-.bnbchainIcon {
-  background: linear-gradient(135deg, #f3ba2f, #f0b90b);
-  color: #1e1e1e;
-}
 
 .address {
   font-family: 'Courier New', monospace;
@@ -135,7 +105,6 @@
 
 .loadingSpinner {
   font-size: 0.9rem;
-  animation: spin 1s linear infinite;
 }
 
 .balancesList {
@@ -178,10 +147,6 @@
   padding: 16px;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 
 @media (max-width: 768px) {
   .walletCard {
@@ -199,7 +164,4 @@
     gap: 8px;
   }
 
-  .chainName {
-    min-width: auto;
-  }
 }
