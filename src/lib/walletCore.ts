@@ -67,8 +67,6 @@ export const initializeWalletCore = async (): Promise<WalletCore> => {
     throw new Error(`Trust Wallet Core initialization failed`);
   }
 };
-
-
 export const clearWalletCore = (): void => {
   walletCoreInstance = null;
 };
