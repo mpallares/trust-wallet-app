@@ -9,8 +9,28 @@ const formatBalance = (balance: string, decimals: number = 18): string => {
   try {
     const balanceInWei = BigInt(balance);
     const divisor = BigInt(10 ** decimals);
-    const formatted = balanceInWei / divisor;
-    return formatted.toString();
+    
+    // Get the integer part
+    const integerPart = balanceInWei / divisor;
+    
+    // Get the fractional part
+    const remainder = balanceInWei % divisor;
+    
+    // Convert to decimal with up to 6 decimal places
+    if (remainder === BigInt(0)) {
+      return integerPart.toString();
+    }
+    
+    // Convert remainder to decimal string
+    const fractionalPart = remainder.toString().padStart(decimals, '0');
+    // Trim trailing zeros and limit to 6 decimal places
+    const trimmed = fractionalPart.replace(/0+$/, '').slice(0, 6);
+    
+    if (trimmed === '') {
+      return integerPart.toString();
+    }
+    
+    return `${integerPart}.${trimmed}`;
   } catch {
     return '0';
   }
