@@ -1,0 +1,205 @@
+.walletCard {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.walletCard:hover {
+  box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.15);
+}
+
+.walletHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.walletInfo {
+  flex: 1;
+}
+
+.walletTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+}
+
+.walletDate {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.viewKeyButton {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.viewKeyButton:hover {
+  background: linear-gradient(135deg, #059669, #047857) ;
+}
+
+.addressesList {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
+}
+
+.addressesTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 16px 0;
+}
+
+.addressItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.chainName {
+  font-weight: 600;
+  color: #4b5563;
+  min-width: 100px;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chainIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.ethereumIcon {
+  background: linear-gradient(135deg, #627eea, #4b6bf5);
+}
+
+.bnbchainIcon {
+  background: linear-gradient(135deg, #f3ba2f, #f0b90b);
+  color: #1e1e1e;
+}
+
+.address {
+  font-family: 'Courier New', monospace;
+  background: #f8fafc;
+  color: #1e293b;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  border: 1px solid #e2e8f0;
+  word-break: break-all;
+  flex: 1;
+}
+
+.balancesSection {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.balancesTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loadingSpinner {
+  font-size: 0.9rem;
+  animation: spin 1s linear infinite;
+}
+
+.balancesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.balanceItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.balanceNetwork {
+  font-weight: 500;
+  color: #4b5563;
+  text-transform: capitalize;
+}
+
+.balanceAmount {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: #059669;
+}
+
+.balanceError {
+  color: #dc2626;
+}
+
+.noBalances {
+  color: #6b7280;
+  font-style: italic;
+  margin: 0;
+  text-align: center;
+  padding: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .walletCard {
+    padding: 24px;
+  }
+
+  .walletHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .addressItem {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .chainName {
+    min-width: auto;
+  }
+}
