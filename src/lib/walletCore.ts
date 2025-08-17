@@ -63,7 +63,7 @@ export const initializeWalletCore = async (): Promise<WalletCore> => {
       AnyAddress: coreObj.AnyAddress || null,
     };
     return walletCoreInstance;
-  } catch (error) {
+  } catch {
     throw new Error(`Trust Wallet Core initialization failed`);
   }
 };

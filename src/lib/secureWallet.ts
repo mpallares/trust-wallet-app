@@ -110,7 +110,7 @@ export const decryptMnemonic = async (encryptedData: string, password: string): 
     
     // Step 6: Convert decrypted bytes back to string
     return new TextDecoder().decode(decrypted);
-  } catch (error) {
+  } catch {
     throw new Error('Invalid password');
   }
 };
@@ -124,15 +124,15 @@ export const createSecureWallet = async (password: string, name: string): Promis
   const walletCore = await initializeWalletCore();
   
   // Step 1: Generate new HD wallet using Trust Wallet Core
-  const hdWallet = (walletCore.HDWallet as any).create(128, '');
+  const hdWallet = (walletCore.HDWallet as unknown as { create: (strength: number, passphrase: string) => unknown }).create(128, '');
   
   // Step 2: Extract the mnemonic phrase from the wallet
-  const mnemonic = hdWallet.mnemonic();
+  const mnemonic = (hdWallet as unknown as { mnemonic: () => string }).mnemonic();
   
   // Step 3: Generate addresses for multiple EVM networks using Trust Wallet Core
   const addresses = {
-    ethereum: hdWallet.getAddressForCoin((walletCore.CoinType as any).ethereum),
-    bnbchain: hdWallet.getAddressForCoin((walletCore.CoinType as any).smartChain),
+    ethereum: (hdWallet as unknown as { getAddressForCoin: (coinType: unknown) => string }).getAddressForCoin((walletCore.CoinType as unknown as { ethereum: unknown }).ethereum),
+    bnbchain: (hdWallet as unknown as { getAddressForCoin: (coinType: unknown) => string }).getAddressForCoin((walletCore.CoinType as unknown as { smartChain: unknown }).smartChain),
   };
   
   const encryptedMnemonic = await encryptMnemonic(mnemonic, password);
@@ -180,7 +180,7 @@ export const exportMnemonic = async (walletId: string, password: string): Promis
  * Creates HD wallet in memory from encrypted wallet
  * Wallet exists only in memory and is destroyed when function ends
  */
-export const unlockWallet = async (walletId: string, password: string): Promise<any> => {
+export const unlockWallet = async (walletId: string, password: string): Promise<unknown> => {
   const wallet = getWalletById(walletId);
   if (!wallet) throw new Error('Wallet not found');
   
@@ -189,5 +189,5 @@ export const unlockWallet = async (walletId: string, password: string): Promise<
   
   // Step 2: Recreate HD wallet from mnemonic using Trust Wallet Core
   const walletCore = await initializeWalletCore();
-  return (walletCore.HDWallet as any).createWithMnemonic(mnemonic, '');
+  return (walletCore.HDWallet as unknown as { createWithMnemonic: (mnemonic: string, passphrase: string) => unknown }).createWithMnemonic(mnemonic, '');
 };
