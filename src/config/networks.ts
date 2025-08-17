@@ -19,7 +19,7 @@ export const TESTNET_NETWORKS: Record<string, NetworkConfig> = {
     name: 'ethereum-sepolia',
     displayName: 'Ethereum Sepolia',
     chainId: 11155111,
-    rpcUrl: 'https://sepolia.publicnode.com',
+    rpcUrl: 'https://ethereum-sepolia-rpc.publicnode.com',
     explorerUrl: 'https://sepolia.etherscan.io',
     nativeCurrency: {
       name: 'Sepolia Ether',
