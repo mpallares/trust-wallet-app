@@ -133,7 +133,6 @@ export const createSecureWallet = async (password: string, name: string): Promis
   const addresses = {
     ethereum: hdWallet.getAddressForCoin((walletCore.CoinType as any).ethereum),
     bnbchain: hdWallet.getAddressForCoin((walletCore.CoinType as any).smartChain),
-    polygon: hdWallet.getAddressForCoin((walletCore.CoinType as any).polygon),
   };
   
   const encryptedMnemonic = await encryptMnemonic(mnemonic, password);
