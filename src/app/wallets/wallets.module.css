@@ -152,9 +152,6 @@
   color: #1e1e1e;
 }
 
-.polygonIcon {
-  background: linear-gradient(135deg, #8247e5, #6b46c1);
-}
 
 .address {
   font-family: 'Courier New', monospace;
@@ -338,6 +335,67 @@
   color: #475569;
 }
 
+.balancesSection {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.balancesTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loadingSpinner {
+  font-size: 0.9rem;
+  animation: spin 1s linear infinite;
+}
+
+.balancesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.balanceItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.balanceNetwork {
+  font-weight: 500;
+  color: #4b5563;
+  text-transform: capitalize;
+}
+
+.balanceAmount {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: #059669;
+}
+
+.balanceError {
+  color: #dc2626;
+}
+
+.noBalances {
+  color: #6b7280;
+  font-style: italic;
+  margin: 0;
+  text-align: center;
+  padding: 16px;
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -357,6 +415,11 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Responsive Design */
