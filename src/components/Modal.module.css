@@ -14,24 +14,24 @@
 }
 
 .modal {
-  background: white;
-  border-radius: 20px;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
   width: 90%;
   max-width: 500px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-md);
   animation: slideUp 0.3s ease;
 }
 
 .modalHeader {
   display: flex;
   align-items: center;
-  padding: 24px 30px 0 30px;
+  padding: var(--space-lg) var(--space-xl) 0 var(--space-xl);
 }
 
 .modalTitle {
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   font-weight: 600;
-  color: #1e293b;
+  color: var(--color-primary);
   margin: 0;
   margin-right: auto;
 }
@@ -39,21 +39,21 @@
 .closeButton {
   background: none;
   border: none;
-  font-size: 1.5rem;
-  color: #64748b;
+  font-size: var(--font-xl);
+  color: var(--color-secondary);
   cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
 }
 
 .closeButton:hover {
-  background: #f1f5f9;
-  color: #475569;
+  background: var(--color-gray-light);
+  color: var(--color-gray-dark);
 }
 
 .modalContent {
-  padding: 20px 30px 30px 30px;
+  padding: var(--space-lg) var(--space-xl) var(--space-xl) var(--space-xl);
 }
 
 /* Animations */
@@ -80,6 +80,6 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .modal {
-    margin: 20px;
+    margin: var(--space-lg);
   }
 }

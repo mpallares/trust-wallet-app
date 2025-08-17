@@ -3,9 +3,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  color: white;
-  font-size: 0.9rem;
+  gap: var(--space-sm);
+  color: var(--color-white);
+  font-size: var(--font-sm);
   font-weight: 500;
 }
 
@@ -16,13 +16,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   font-weight: bold;
-  color: white;
+  color: var(--color-white);
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .chainIcon:hover {
@@ -47,12 +47,12 @@
 
 .chainName {
   font-weight: 600;
-  color: #4b5563;
+  color: var(--color-secondary);
   min-width: 100px;
   text-transform: capitalize;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .ethereumIcon {
@@ -65,7 +65,7 @@
 }
 
 .defaultIcon {
-  background: linear-gradient(135deg, #6b7280, #4b5563);
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-gray-dark));
 }
 
 /* Responsive Design */
@@ -73,7 +73,7 @@
   .chainIcon {
     width: 40px;
     height: 40px;
-    font-size: 1.2rem;
+    font-size: var(--font-lg);
   }
 
   .chainName {

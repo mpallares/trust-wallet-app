@@ -2,49 +2,68 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 16px 32px;
-  border-radius: 12px;
-  border: none;
+  gap: var(--space-sm);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.3s ease;
-  min-width: 200px;
+  transition: var(--transition);
   position: relative;
   overflow: hidden;
 }
 
 .primary {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  color: white;
-  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
 }
 
 .primary:hover:not(.loading):not(:disabled) {
-  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.4);
-  background: linear-gradient(135deg, #2563eb, #1e40af);
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-sm);
 }
 
 .primary:active {
-  transform: translateY(0);
+  transform: translateY(1px);
 }
 
 .primary.loading {
-  background: linear-gradient(135deg, #9ca3af, #6b7280);
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
   cursor: not-allowed;
   transform: none;
 }
 
 .secondary {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);
+  background-color: var(--color-white);
+  color: var(--color-gray-dark);
+  border-color: var(--color-border);
 }
 
 .secondary:hover:not(:disabled) {
-  box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.4);
-  background: linear-gradient(135deg, #059669, #047857);
+  background-color: var(--color-gray-light);
+  border-color: var(--color-gray);
+  box-shadow: var(--shadow-sm);
+}
+
+.icon {
+  background: none;
+  border: none;
+  color: var(--color-secondary);
+  padding: var(--space-sm);
+  min-width: unset;
+  width: auto;
+  height: auto;
+  font-size: var(--font-xl);
+  border-radius: var(--radius-sm);
+}
+
+.icon:hover:not(:disabled) {
+  background-color: var(--color-gray-light);
+  color: var(--color-gray-dark);
 }
 
 .button:disabled {
@@ -56,10 +75,10 @@
   width: 16px;
   height: 16px;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top: 2px solid white;
+  border-top: 2px solid var(--color-white);
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-right: 8px;
+  margin-right: var(--space-sm);
 }
 
 @keyframes spin {
