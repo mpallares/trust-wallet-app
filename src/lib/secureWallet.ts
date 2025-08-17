@@ -149,7 +149,6 @@ export const createSecureWallet = async (password: string, name: string): Promis
   };
 };
 
-// Simple storage functions - no Trust Wallet Core needed for these
 export const getStoredWallets = (): SecureWallet[] => {
   try {
     return JSON.parse(localStorage.getItem('trustWallets') || '[]');

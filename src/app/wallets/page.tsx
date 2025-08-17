@@ -1,17 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './wallets.module.css';
-import {
-  SecureWallet,
-  getStoredWallets,
-  exportMnemonic,
-} from '../../lib/secureWallet';
+import { exportMnemonic } from '../../lib/secureWallet';
+import { useWallets } from '../../hooks/useWallets';
 
 const WalletsPage = () => {
   const router = useRouter();
-  const [wallets, setWallets] = useState<SecureWallet[]>([]);
+  const { wallets } = useWallets();
+  
   const [selectedWallet, setSelectedWallet] = useState<string | null>(null);
   const [password, setPassword] = useState('');
   const [showPrivateKey, setShowPrivateKey] = useState(false);
@@ -20,16 +18,6 @@ const WalletsPage = () => {
     null
   );
 
-  // Load encrypted wallets from localStorage
-  useEffect(() => {
-    try {
-      const secureWallets = getStoredWallets();
-      setWallets(secureWallets);
-    } catch (err) {
-      console.error('Failed to load wallets:', err);
-      setError('Failed to load wallets from storage');
-    }
-  }, []);
 
   // Handle viewing private key
   const handleViewPrivateKey = (walletId: string) => {
