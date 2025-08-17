@@ -96,23 +96,21 @@ export const getBalancesForWallet = async (
   addresses: Record<string, string>, 
   networks: NetworkConfig[]
 ): Promise<WalletBalance[]> => {
-  const results: WalletBalance[] = [];
-
-  for (const network of networks) {
-    // Map network to address type
+  // Create promises for all networks in parallel
+  const balancePromises = networks.map(async (network) => {
     const addressKey = network.id === 'sepolia' ? ADDRESS_TYPES.ETHEREUM : ADDRESS_TYPES.BNBCHAIN;
     const address = addresses[addressKey];
     
     if (address) {
-      // Add delay to prevent rate limiting
-      if (results.length > 0) {
-        await new Promise(resolve => setTimeout(resolve, TIMING.RATE_LIMIT_DELAY));
-      }
-      
-      const balance = await getBalance(address, network);
-      results.push(balance);
+      return await getBalance(address, network);
     }
-  }
+    return null;
+  });
 
-  return results;
+  // Execute all balance requests in parallel
+  const results = await Promise.allSettled(balancePromises);
+  
+  return results
+    .map(result => result.status === 'fulfilled' ? result.value : null)
+    .filter((balance): balance is WalletBalance => balance !== null);
 };
