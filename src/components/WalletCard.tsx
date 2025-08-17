@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './WalletCard.module.css';
 import { SecureWallet, WalletBalance, NetworkConfig } from '../types';
+import { ChainItem } from './ChainItem';
 
 export interface WalletCardProps {
   wallet: SecureWallet;
@@ -19,24 +20,6 @@ export const WalletCard = ({
   formatDate,
   getAllTestnetNetworks,
 }: WalletCardProps) => {
-  const getChainDisplay = (chainKey: string) => {
-    switch (chainKey) {
-      case 'ethereum':
-        return {
-          name: 'Ethereum',
-          icon: 'E',
-          iconClass: styles.ethereumIcon,
-        };
-      case 'bnbchain':
-        return {
-          name: 'BNB Chain',
-          icon: 'B',
-          iconClass: styles.bnbchainIcon,
-        };
-      default:
-        return { name: chainKey, icon: '?', iconClass: '' };
-    }
-  };
 
   return (
     <article className={styles.walletCard}>
@@ -60,18 +43,9 @@ export const WalletCard = ({
       <div className={styles.addressesList}>
         <h4 className={styles.addressesTitle}>Addresses:</h4>
         {Object.entries(wallet.addresses).map(([chain, address]) => {
-          const chainInfo = getChainDisplay(chain);
-
           return (
             <div key={chain} className={styles.addressItem}>
-              <span className={styles.chainName}>
-                <div
-                  className={`${styles.chainIcon} ${chainInfo.iconClass}`}
-                >
-                  {chainInfo.icon}
-                </div>
-                {chainInfo.name}:
-              </span>
+              <ChainItem chainKey={chain} variant="compact" />
               <span className={styles.address}>{address}</span>
             </div>
           );

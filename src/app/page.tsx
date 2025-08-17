@@ -7,6 +7,7 @@ import { initializeWalletCore, WalletCore } from '../lib/walletCore';
 import { createSecureWallet } from '../lib/secureWallet';
 import { useWallets } from '../hooks/useWallets';
 import { Button } from '../components/Button';
+import { ChainItem } from '../components/ChainItem';
 
 const HomePage = () => {
   const router = useRouter();
@@ -110,36 +111,8 @@ const HomePage = () => {
 
           {/* Supported Chains */}
           <div className={styles.chainGrid}>
-            <div className={styles.chainItem}>
-              <div className={`${styles.chainIcon} ${styles.bitcoinIcon}`}>
-                ₿
-              </div>
-              <span>Bitcoin</span>
-            </div>
-            <div className={styles.chainItem}>
-              <div className={`${styles.chainIcon} ${styles.ethereumIcon}`}>
-                Ξ
-              </div>
-              <span>Ethereum</span>
-            </div>
-            <div className={styles.chainItem}>
-              <div className={`${styles.chainIcon} ${styles.binanceIcon}`}>
-                B
-              </div>
-              <span>BSC</span>
-            </div>
-            <div className={styles.chainItem}>
-              <div className={`${styles.chainIcon} ${styles.polygonIcon}`}>
-                ⟠
-              </div>
-              <span>Polygon</span>
-            </div>
-            <div className={styles.chainItem}>
-              <div className={`${styles.chainIcon} ${styles.solanaIcon}`}>
-                ◎
-              </div>
-              <span>Solana</span>
-            </div>
+            <ChainItem chainKey="ethereum" />
+            <ChainItem chainKey="bnbchain" name="BSC" />
           </div>
         </div>
 
