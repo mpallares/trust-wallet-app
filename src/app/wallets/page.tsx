@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './wallets.module.css';
+import styles from './page.module.css';
 import { exportMnemonic } from '../../lib/secureWallet';
 import { useWallets } from '../../hooks/useWallets';
 import { useAppSelector } from '../../store/hooks';
