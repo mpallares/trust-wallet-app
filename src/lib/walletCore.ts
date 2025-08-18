@@ -1,3 +1,4 @@
+// Simple interface based on actual Trust Wallet Core exports
 export interface WalletCore {
   HDWallet: unknown;
   CoinType: unknown;
@@ -13,60 +14,42 @@ export const initializeWalletCore = async (): Promise<WalletCore> => {
   }
 
   try {
-    const walletCoreModule = await import('@trustwallet/wallet-core');
-
-    if (!walletCoreModule.initWasm) {
-      throw new Error(
-        'initWasm function not found in Trust Wallet Core module'
-      );
-    }
-
-    let initPromise: Promise<unknown>;
+   
+    
+    const { initWasm } = await import('@trustwallet/wallet-core');
+    
+    let core;
     try {
-      initPromise = (
-        walletCoreModule.initWasm as (options?: {
-          locateFile?: (path: string) => string;
-        }) => Promise<unknown>
-      )({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      core = await (initWasm as any)({
         locateFile: (path: string) => {
           if (path.endsWith('.wasm')) {
-            const wasmPath = '/wallet-core.wasm';
-            return wasmPath;
+            return '/wallet-core.wasm';
           }
           return path;
         },
       });
     } catch {
-      initPromise = walletCoreModule.initWasm();
+      core = await initWasm();
     }
-
-    const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('WASM initialization timeout')), 30000);
-    });
-
-    const core = await Promise.race([initPromise, timeoutPromise]);
-
-    if (!core || typeof core !== 'object') {
-      throw new Error('Invalid core object returned from initWasm');
-    }
-
-    const coreObj = core as Record<string, unknown>;
-    if (!coreObj.HDWallet || !coreObj.CoinType) {
-      throw new Error('Required Trust Wallet Core components not available');
-    }
-
+    
+    
+    const { HDWallet, CoinType, HexCoding, AnyAddress } = core;
+    
     // Cache the instance
     walletCoreInstance = {
-      HDWallet: coreObj.HDWallet,
-      CoinType: coreObj.CoinType,
-      HexCoding: coreObj.HexCoding || null,
-      AnyAddress: coreObj.AnyAddress || null,
+      HDWallet,
+      CoinType, 
+      HexCoding,
+      AnyAddress,
     };
+    
     return walletCoreInstance;
-  } catch {
-    throw new Error(`Trust Wallet Core initialization failed`);
+  } catch (error) {
+    throw new Error(`Failed to initialize Trust Wallet Core: ${error}`);
   }
 };
+
 export const clearWalletCore = (): void => {
   walletCoreInstance = null;
 };
