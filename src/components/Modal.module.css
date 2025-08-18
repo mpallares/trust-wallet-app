@@ -15,7 +15,7 @@
 
 .modal {
   background: var(--color-white);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   width: 90%;
   max-width: 500px;
   box-shadow: var(--shadow-md);

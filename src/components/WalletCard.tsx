@@ -35,7 +35,7 @@ export const WalletCard = ({
         </div>
         <Button
           onClick={() => onViewPrivateKey(wallet.id)}
-          variant="secondary"
+          variant="primary"
         >
           🔑 View Private Key
         </Button>

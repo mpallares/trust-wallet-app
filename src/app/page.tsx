@@ -96,10 +96,7 @@ const HomePage = () => {
             <span className={styles.gradientText}> Wallet Solution</span>
           </h2>
           <p className={styles.heroDescription}>
-            Built with Trust Wallet Core supporting 130+ blockchains. Generate
-            secure HD wallets compatible with all EVM networks including
-            Ethereum, BNB Chain, Polygon, and more. Industry-leading
-            cryptographic standards with encrypted storage.
+            Generate secure HD wallets compatible with all EVM networks including Ethereum and BNB Chain.
           </p>
 
           {/* Supported Chains */}

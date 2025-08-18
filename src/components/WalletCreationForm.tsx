@@ -79,7 +79,6 @@ export const WalletCreationForm = ({
           className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
           placeholder="Minimum 8 characters"
           disabled={isCreating}
-          autoComplete="new-password"
         />
         {errors.password && (
           <span className={styles.error}>{errors.password}</span>
@@ -98,7 +97,6 @@ export const WalletCreationForm = ({
           className={`${styles.input} ${errors.confirmPassword ? styles.inputError : ''}`}
           placeholder="Re-enter password"
           disabled={isCreating}
-          autoComplete="new-password"
         />
         {errors.confirmPassword && (
           <span className={styles.error}>{errors.confirmPassword}</span>
