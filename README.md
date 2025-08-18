@@ -50,7 +50,7 @@ pnpm run build
 - **State Management**: Redux Toolkit
 - **Styling**: CSS Modules
 - **Wallet Core**: Trust Wallet Core
-- **RPC Providers**: PublicNode, dRPC
+- **RPC Providers**: PublicNode
 - **Testing**: Vitest, Testing Library, jsdom
 - **CI/CD**: GitHub Actions with automated testing
 
