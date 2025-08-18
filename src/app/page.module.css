@@ -38,18 +38,23 @@
   margin: 0 auto;
   padding: 0 32px 64px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
 }
 
 /* Hero Section */
 .hero {
-  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
 .heroTitle {
   font-size: 3.5rem;
   font-weight: 800;
   color: white;
-  margin: 0 0 24px 0;
+  margin: 0;
   line-height: 1.1;
   letter-spacing: -0.025em;
 }
@@ -65,10 +70,8 @@
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.6;
-  margin: 0 0 40px 0;
+  margin: 0 auto;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* Chain Grid */
@@ -76,7 +79,6 @@
   display: flex;
   justify-content: center;
   gap: 24px;
-  margin: 40px 0;
   flex-wrap: wrap;
 }
 
@@ -89,9 +91,11 @@
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 32px;
-  margin: 24px 0;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
 /* Loading States */
@@ -102,7 +106,7 @@
   border-top: 4px solid #3b82f6;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin: 0 auto 16px;
+  margin: 0 auto;
 }
 
 
@@ -116,7 +120,7 @@
 .actionsTitle {
   font-size: 1.5rem;
   font-weight: 600;
-  margin: 0 0 12px 0;
+  margin: 0;
   color: #1e293b;
 }
 
@@ -137,7 +141,6 @@
 
 .errorIcon {
   font-size: 2rem;
-  margin-bottom: 12px;
 }
 
 .errorContent {
@@ -150,7 +153,6 @@
 
 .errorDescription {
   color: #991b1b;
-  margin-bottom: 16px;
 }
 
 .retryButton {
@@ -172,14 +174,15 @@
 
 /* Actions Card */
 .actionsHeader {
-  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
 .actionButtons {
   display: flex;
   gap: 16px;
   justify-content: center;
-  margin-bottom: 32px;
   flex-wrap: wrap;
 }
 
@@ -221,7 +224,6 @@
   .errorCard,
   .actionsCard {
     padding: 24px;
-    margin: 16px 0;
   }
   
   .actionButtons {
@@ -274,23 +276,25 @@
   text-align: center;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   animation: slideUp 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
 .popupIcon {
   font-size: 3rem;
-  margin-bottom: 20px;
 }
 
 .popupTitle {
   font-size: 1.5rem;
   font-weight: 600;
   color: #1e293b;
-  margin: 0 0 12px 0;
+  margin: 0;
 }
 
 .popupDescription {
   color: #64748b;
-  margin: 0 0 30px 0;
+  margin: 0;
   line-height: 1.6;
 }
 

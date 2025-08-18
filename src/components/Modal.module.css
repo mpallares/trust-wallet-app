@@ -25,6 +25,7 @@
 .modalHeader {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: var(--space-lg) var(--space-xl) 0 var(--space-xl);
 }
 
@@ -33,7 +34,6 @@
   font-weight: 600;
   color: var(--color-primary);
   margin: 0;
-  margin-right: auto;
 }
 
 .closeButton {
@@ -80,6 +80,6 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .modal {
-    margin: var(--space-lg);
+    width: calc(100% - 2 * var(--space-lg));
   }
 }

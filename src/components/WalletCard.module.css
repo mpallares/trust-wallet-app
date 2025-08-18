@@ -6,6 +6,9 @@
   box-shadow: var(--shadow-md);
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
 .walletCard:hover {
@@ -16,20 +19,22 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: var(--space-lg);
   flex-wrap: wrap;
   gap: var(--space-md);
 }
 
 .walletInfo {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
 .walletTitle {
   font-size: var(--font-xl);
   font-weight: 600;
   color: var(--color-primary);
-  margin: 0 0 var(--space-sm) 0;
+  margin: 0;
 }
 
 .walletDate {
@@ -57,20 +62,22 @@
 .addressesList {
   border-top: 1px solid var(--color-border);
   padding-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
 .addressesTitle {
   font-size: var(--font-lg);
   font-weight: 600;
   color: var(--color-gray-dark);
-  margin: 0 0 var(--space-md) 0;
+  margin: 0;
 }
 
 .addressItem {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  margin-bottom: var(--space-sm);
   flex-wrap: wrap;
 }
 
@@ -89,14 +96,16 @@
 .balancesSection {
   border-top: 1px solid var(--color-border);
   padding-top: var(--space-lg);
-  margin-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
 .balancesTitle {
   font-size: var(--font-lg);
   font-weight: 600;
   color: var(--color-gray-dark);
-  margin: 0 0 var(--space-md) 0;
+  margin: 0;
   display: flex;
   align-items: center;
   gap: var(--space-sm);

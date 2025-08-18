@@ -78,7 +78,6 @@
   border-top: 2px solid var(--color-white);
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-right: var(--space-sm);
 }
 
 @keyframes spin {
